@@ -1,0 +1,48 @@
+@import "vars";
+@import "fonts";
+@import "libs";
+
+
+
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+ul,
+h1,
+h2,
+h3 {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+ 
+
+}
+
+
+
+
+
+
+@import "media";
