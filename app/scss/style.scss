@@ -33,11 +33,60 @@ html,
 body {
     width: 100%;
     height: 100%;
+    background: #fbfbfb;
 }
 
 body {
- 
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 26px;
+}
 
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 200px;
+    width: 500px;
+    box-shadow: 0px 3px 25px 0px rgba(0,0,0,0.35);
+}
+
+.form-item{
+    display: flex;
+    input{
+        padding: 12px 10px 12px 50px;
+        font-style: italic;
+        outline: none;
+        border: 1px solid #a3a3a3;
+        width: 100%;
+        &::placeholder{
+            opacity: .3;
+        }
+    }
+    input[type=submit]{
+        max-width: 100px;
+        padding-left: 5px;
+        padding-right: 5px;
+        cursor: pointer;
+    };
+    
+}
+.form__btn{
+    
+}
+
+.list{
+    border-left: 1px solid #a3a3a3;
+    border-right: 1px solid #a3a3a3;
+    border-top: 2px solid #a3a3a3;
+    &__item{
+        padding: 0 50px;
+        line-height: 55px;
+        border-bottom: 1px solid #a3a3a3;
+    }
 }
 
 
