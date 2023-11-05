@@ -1,20 +1,24 @@
 window.addEventListener("DOMContentLoaded", () => {
 
-    const listArray = {
-        // technology: [
-        //     // "html",
-        //     // "css",
-        //     // "js"
-        // ]
-        technology: JSON.parse(localStorage.getItem("items"))
+    let listArray = {
+        technology: []
     };
+
+    if (localStorage.getItem("items")) {
+        listArray = {
+            technology: JSON.parse(localStorage.getItem("items"))
+        }
+    }
+
+
 
     const form = document.querySelector(".form-item"),
         formValue = document.querySelector(".form__value"),
         list = document.querySelector(".list"),
         counter = document.querySelector(".counter"),
         removeAll = document.querySelector(".remove-all"),
-        sortItem = document.querySelector(".sort-all");
+        sortItem = document.querySelector(".sort-all"),
+        removeCheck = document.querySelector(".remove-check");
 
 
     form.addEventListener("submit", (e) => {
@@ -23,7 +27,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
         let newTodo = {
             todo: formValue.value,
-            checked: false,
+            checked: false
         }
 
         // let newItem = formValue.value;
@@ -34,6 +38,7 @@ window.addEventListener("DOMContentLoaded", () => {
             console.log(listArray.technology);
             // listArray.technology.sort();
             listAdd(list, listArray.technology);
+            reloadListItem();
             listSort();
             localSave();
         }
@@ -43,7 +48,7 @@ window.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    const listAdd = (listParent, listTechnology) => {
+    function listAdd(listParent, listTechnology) {
         listParent.innerHTML = "";
 
         listTechnology.forEach((item, i) => {
@@ -51,11 +56,11 @@ window.addEventListener("DOMContentLoaded", () => {
             listParent.innerHTML += `
                 <li class="list__item">
                     <input type="checkbox" id="item_${i}" ${item.checked ? "checked" : ""}>
-                    <label class="list__item-text" for="item_${i}">${item.todo}</label><span class="list__item-del"></span>
+                    <label class="list__item-text" for="item_${i}">${i + 1}. ${item.todo}</label><span class="list__item-del"></span>
                 </li>
             `;
             count();
-            // localSave();
+            localSave();
 
             const btnDel = document.querySelectorAll(".list__item-del");
 
@@ -64,8 +69,9 @@ window.addEventListener("DOMContentLoaded", () => {
                     item.parentElement.remove();
                     listTechnology.splice(x, 1);
                     listAdd(list, listArray.technology);
+                    reloadListItem();
                     // if (listArray.technology.length == 0) {
-                        count();
+                    count();
                     // }
                     localSave();
                 });
@@ -75,23 +81,6 @@ window.addEventListener("DOMContentLoaded", () => {
         localSave();
     };
     listAdd(list, listArray.technology);
-
-    list.addEventListener("change", function(e){
-        // console.log(e.target.getAttribute("id"));
-        let idInput = e.target.getAttribute("id");
-        let forLabel = list.querySelector('[for='+ idInput +']');
-        let valueLabel = forLabel.innerHTML;
-        console.log(valueLabel);
-
-        listArray.technology.forEach((item) => {
-            // console.log(item.todo);
-            if(item.todo == valueLabel){
-                item.checked = !item.checked;
-                localSave();
-            }
-        })
-    });
-    
 
 
     function count() {
@@ -120,10 +109,82 @@ window.addEventListener("DOMContentLoaded", () => {
     }
     listSort();
 
-    function localSave(){
+    function localSave() {
         localStorage.setItem("items", JSON.stringify(listArray.technology));
     }
 
+
+    list.addEventListener("change", function (e) {
+        // console.log(e.target.getAttribute("id"));
+        let idInput = e.target.getAttribute("id");
+        let forLabel = list.querySelector('[for=' + idInput + ']');
+        // console.log(forLabel);
+        let valueLabel = forLabel.innerHTML.split(" ");
+        let removeNumber = valueLabel.splice(0, 1);
+        let valueLabelText = valueLabel.join(" ");
+        // console.log(valueLabel);
+        // console.log(removeNumber);
+        // console.log(valueLabelText);
+
+
+        listArray.technology.forEach((item) => {
+            // console.log(item.todo);
+            if (item.todo == valueLabelText) {
+                item.checked = !item.checked;
+
+                listAdd(list, listArray.technology);
+
+                console.log(listArray.technology);
+                console.log(list);
+                reloadListItem();
+
+
+                
+                // document.location.reload();
+
+                // console.log(item);
+                // if(item.checked == true){
+                //     forLabel.style.textDecoration = "line-through";
+                //     console.log(listArray.technology);
+                //     // localSave();
+                // } else {
+                //     forLabel.style.textDecoration = "none";
+                //     // localSave();
+                // }
+
+                localSave();
+            }
+        })
+    });
+
+    
+    let listItem;
+
+    function reloadListItem(){
+        listItem = document.querySelectorAll("input[type='checkbox']:checked");
+        console.log(listItem);
+        localSave();
+    }
+    reloadListItem();
+
+
+    removeCheck.addEventListener("click", () => {
+        console.log(list);
+        listItem.forEach(item => {
+            // console.log(item);
+            item.parentElement.remove();
+            
+            // console.log(listArray.technology);
+
+            listArray.technology = listArray.technology.filter((n) => {return n.checked == false});
+            // console.log(listArray.technology);
+            listAdd(list, listArray.technology);
+
+        });
+    });
+
+
+
     
 
 
@@ -140,7 +201,13 @@ window.addEventListener("DOMContentLoaded", () => {
 
 
 
-    
+
+
+
+
+
+
+
     // const listArray = {
     //     // technology: [
     //     //     // "html",

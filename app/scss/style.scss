@@ -94,6 +94,9 @@ body {
             margin-right: auto;
             margin-left: 20px;
         }
+        // &-decor{
+        //     text-decoration: line-through;
+        // }
         &-del{
             display: inline-block;
             background-image: url(../img/delete-button-svgrepo-com.png);
@@ -122,9 +125,10 @@ body {
     font-size: 18px;
 }
 
+.remove-check,
 .remove-all,
 .sort-all{
-    margin-left: 100px;
+    margin-left: 20px;
     outline: none;
     border: 2px solid #a3a3a3;
     border-radius: 5px;
@@ -135,9 +139,9 @@ body {
     }
 }
 
-.sort-all{
-    margin-left: 20px;
-}
+// .sort-all{
+//     margin-left: 20px;
+// }
 
 
 
