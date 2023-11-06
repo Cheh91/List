@@ -10,8 +10,6 @@ window.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-
-
     const form = document.querySelector(".form-item"),
         formValue = document.querySelector(".form__value"),
         list = document.querySelector(".list"),
@@ -70,13 +68,10 @@ window.addEventListener("DOMContentLoaded", () => {
                     listTechnology.splice(x, 1);
                     listAdd(list, listArray.technology);
                     reloadListItem();
-                    // if (listArray.technology.length == 0) {
                     count();
-                    // }
                     localSave();
                 });
             });
-
         });
         localSave();
     };
@@ -132,26 +127,11 @@ window.addEventListener("DOMContentLoaded", () => {
             if (item.todo == valueLabelText) {
                 item.checked = !item.checked;
 
-                listAdd(list, listArray.technology);
-
-                console.log(listArray.technology);
-                console.log(list);
+                // listAdd(list, listArray.technology);
+                // console.log(forLabel);
+                // console.log(listArray.technology);
+                // console.log(list);
                 reloadListItem();
-
-
-                
-                // document.location.reload();
-
-                // console.log(item);
-                // if(item.checked == true){
-                //     forLabel.style.textDecoration = "line-through";
-                //     console.log(listArray.technology);
-                //     // localSave();
-                // } else {
-                //     forLabel.style.textDecoration = "none";
-                //     // localSave();
-                // }
-
                 localSave();
             }
         })
@@ -162,7 +142,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     function reloadListItem(){
         listItem = document.querySelectorAll("input[type='checkbox']:checked");
-        console.log(listItem);
+        // console.log(listItem);
         localSave();
     }
     reloadListItem();
@@ -178,8 +158,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
             listArray.technology = listArray.technology.filter((n) => {return n.checked == false});
             // console.log(listArray.technology);
+            count();
             listAdd(list, listArray.technology);
-
         });
     });
 

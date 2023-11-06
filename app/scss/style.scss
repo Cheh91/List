@@ -139,11 +139,10 @@ body {
     }
 }
 
-// .sort-all{
-//     margin-left: 20px;
-// }
-
-
+.list__item input:checked + label{
+    text-decoration: line-through;
+    color: darkgrey;
+}
 
 
 
